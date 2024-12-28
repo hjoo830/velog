@@ -16,10 +16,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Set time zone
+        run: |
+          sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+          echo "Asia/Seoul" | sudo tee /etc/timezone
+          date
+
       - name: Push changes
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name 'hjoo830'
+          git config --global user.email 'hjoo830@naver.com'
           git pull origin main --rebase
           git push https://${{ secrets.GH_PAT }}@github.com/hjoo830/velog.git
 
